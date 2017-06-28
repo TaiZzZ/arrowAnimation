@@ -9,6 +9,7 @@
 #include <QGraphicsScene>
 #include <QPushButton>
 #include <QPropertyAnimation>
+#include <QGraphicsDropShadowEffect>
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,8 @@ private:
 
     QGraphicsScene *scene;
     Arrow *arrow;
+
+    QGraphicsDropShadowEffect *shadowArrow;
 
     QPropertyAnimation *animationFleche;
 

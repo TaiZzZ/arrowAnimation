@@ -22,6 +22,13 @@ MainWindow::MainWindow(QWidget *parent) :
     scene -> addItem(arrow);
     arrow->setPos(scene->width() / 2 - 125, scene->height() / 2);
 
+    // Ajout de l'ombre
+
+    shadowArrow = new QGraphicsDropShadowEffect;
+    shadowArrow->setOffset(2);
+    shadowArrow->setColor(QColor(Qt::black));
+    arrow->setGraphicsEffect(shadowArrow);
+
     // On connect
 
     connect(arrow,SIGNAL(signalArrow()),this,SLOT(slotFromFleche()));
