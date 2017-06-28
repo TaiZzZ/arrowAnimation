@@ -24,10 +24,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Ajout de l'ombre
 
-    shadowArrow = new QGraphicsDropShadowEffect;
+    /*shadowArrow = new QGraphicsDropShadowEffect;
     shadowArrow->setOffset(2);
     shadowArrow->setColor(QColor(Qt::black));
-    arrow->setGraphicsEffect(shadowArrow);
+    arrow->setGraphicsEffect(shadowArrow);*/
 
     // On connect
 

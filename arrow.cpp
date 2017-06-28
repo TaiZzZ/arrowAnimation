@@ -35,6 +35,7 @@ void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     arrow.moveTo(rect.right(),rect.center().y());
     arrow.lineTo(rect.left(),rect.top());
     arrow.cubicTo(rect.left()+rect.width()*2/5,rect.top()+rect.height()/3,rect.left()+rect.width()*2/5,rect.bottom()-rect.height()/3,rect.left(),rect.bottom());
+    //arrow.lineTo(rect.left(),rect.bottom()); // Doesn't change anything
     arrow.closeSubpath();
     arrow.setFillRule(Qt::WindingFill);
 
