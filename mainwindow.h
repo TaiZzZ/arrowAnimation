@@ -1,15 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QWidget>
-
-#include "arrow.h"
+#include "mycircle.h"
+#include "mywhiteshadow.h"
+#include "mytextok.h"
 
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QPushButton>
-#include <QPropertyAnimation>
-#include <QGraphicsDropShadowEffect>
 
 namespace Ui {
 class MainWindow;
@@ -25,20 +23,25 @@ public:
 
 protected :
 
-    void lancerAnimFleche();
+    void lancerAnimBoutonRond();
 
 private:
     Ui::MainWindow *ui;
 
     QGraphicsScene *scene;
-    Arrow *arrow;
 
-    QGraphicsDropShadowEffect *shadowArrow;
+    MyCircle *roundButton;
+    MyWhiteShadow *whiteShadow;
+    MyTextOk *textOk;
 
-    QPropertyAnimation *animationFleche;
+    QGraphicsDropShadowEffect *shadowCircle;
+    QPropertyAnimation *animationBoutonRondTaille;
+    QPropertyAnimation *animationBoutonRondEllipse;
+    QPropertyAnimation *animationBoutonRondOk;
+    QPropertyAnimation *animationBoutonRondOkTaille;
 
 private slots :
-    void slotFromFleche();
+    void slotFromCircle();
 };
 
 #endif // MAINWINDOW_H

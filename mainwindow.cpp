@@ -8,30 +8,32 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // On crée nos objets
-    arrow = new Arrow();
+
+    roundButton = new MyCircle;
+    whiteShadow = new MyWhiteShadow(roundButton);
+    textOk = new MyTextOk(roundButton);
+
+    // Ajout des ombres
+    shadowCircle = new QGraphicsDropShadowEffect;
+    shadowCircle->setOffset(0);
+    shadowCircle->setBlurRadius(15);
+    roundButton->setGraphicsEffect(shadowCircle);
 
     // On initialise notre vue
 
-    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint); // sert à enlever les bords de la fenêtre
+    setWindowFlags(Qt::FramelessWindowHint);
 
     // On ajoute notre scene à notre vue
 
-    scene = new QGraphicsScene(QRectF(0,0,640,480),this);
+    scene = new QGraphicsScene(QRect(0, 0, 640, 480), this);
     ui->vue->setScene(scene);
 
-    scene -> addItem(arrow);
-    arrow->setPos(scene->width() / 2 - 125, scene->height() / 2);
-
-    // Ajout de l'ombre
-
-    /*shadowArrow = new QGraphicsDropShadowEffect;
-    shadowArrow->setOffset(2);
-    shadowArrow->setColor(QColor(Qt::black));
-    arrow->setGraphicsEffect(shadowArrow);*/
+    scene -> addItem(roundButton);
+    roundButton -> setPos(scene->width() / 2,scene->height() / 2);
 
     // On connect
 
-    connect(arrow,SIGNAL(signalArrow()),this,SLOT(slotFromFleche()));
+    connect(roundButton,SIGNAL(signal1()),this,SLOT(slotFromCircle()));
 }
 
 MainWindow::~MainWindow()
@@ -39,21 +41,46 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::lancerAnimFleche()
+void MainWindow::lancerAnimBoutonRond()
 {
-    animationFleche = new QPropertyAnimation(arrow,"geometry");
+    animationBoutonRondTaille = new QPropertyAnimation(roundButton, "geometry");
 
-    animationFleche->setDuration(300);
-    animationFleche->setKeyValueAt(0,QRectF(100,-50,50,100));
-    animationFleche->setKeyValueAt(0.5,QRectF(105,-50,50,100));
-    animationFleche->setKeyValueAt(1,QRectF(100,-50,50,100));
+    animationBoutonRondTaille->setDuration(300);
+    animationBoutonRondTaille->setKeyValueAt(0, QRectF(-90, -90, 180, 180));
+    animationBoutonRondTaille->setKeyValueAt(0.5, QRectF(-85,-85,170,170));
+    animationBoutonRondTaille->setKeyValueAt(1, QRectF(-90, -90, 180, 180));
 
-    animationFleche->start();
+    animationBoutonRondTaille -> start();
+
+    animationBoutonRondEllipse = new QPropertyAnimation(whiteShadow, "geometry");
+
+    animationBoutonRondEllipse->setDuration(300);
+    animationBoutonRondEllipse->setKeyValueAt(0,QRectF(-70,-80,140,80));
+    animationBoutonRondEllipse->setKeyValueAt(0.5,QRectF(-65,-75,130,90));
+    animationBoutonRondEllipse->setKeyValueAt(1,QRectF(-70,-80,140,80));
+
+    animationBoutonRondEllipse->start();
+
+    animationBoutonRondOk = new QPropertyAnimation(textOk,"pos");
+
+    animationBoutonRondOk->setDuration(300);
+    animationBoutonRondOk->setKeyValueAt(0,QPointF(-40,-45));
+    animationBoutonRondOk->setKeyValueAt(0.5,QPointF(-37, -41));
+    animationBoutonRondOk->setKeyValueAt(1,QPointF(-40, -45));
+
+    animationBoutonRondOk->start();
+
+    animationBoutonRondOkTaille = new QPropertyAnimation(textOk,"font");
+
+    animationBoutonRondOkTaille->setDuration(300);
+    animationBoutonRondOkTaille->setStartValue(QFont("Colibri",50));
+    animationBoutonRondOkTaille->setEndValue(QFont("Colibri",50));
+
+    animationBoutonRondOkTaille->start();
+
 }
 
-void MainWindow::slotFromFleche()
+void MainWindow::slotFromCircle()
 {
-    lancerAnimFleche();
+    lancerAnimBoutonRond();
 }
-
